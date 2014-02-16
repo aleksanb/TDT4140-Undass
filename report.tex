@@ -253,4 +253,98 @@ Etter at Beate og Finn har godtatt møteinnkallingen blir Jens syk. Han sletter 
 
 \end{enumerate}
 
+\newpage
+\section{Arkitektur}
+Dette kapitlet beskriver krav til konstruksjon eller systemdesign for fellesprosjektet. Konstruksjon av et system skal i prinsippet ikke påvirke de funksjonene som systemet har, men er relatert til de ikke-funksjonelle krav, for eksempel utvidbarhet, vedlikeholdbarhet, ytelse og skalerbarhet. Flerbrukerstøtte er et overordnet ikke-funksjonelt krav, dvs. at mange brukere skal kunne få tilgang til og endre de samme underliggende dataene, fra ulike maskiner på et nettverk.
+
+Ved siden av de spesifiserte ikke-funksjonelle kravene, er det også en del generelle egenskaper ved konstruksjonen som er viktig, for eksempel at funksjoner har definerte grensesnitt i forhold til hverandre og at funksjoner en ønsker å endre på uavhengig av hverandre, ikke er for tett viklet sammen. Det er spesielt to typer koblinger vi er opptatt av å løse opp, nemlig koblinger mellom:
+
+\begin{enumerate}
+
+\item
+Applikasjonsdata (modell) og grafisk brukergrensesnitt (GUI)
+
+\item
+Applikasjonsdata, slik de representeres mens applikasjonen er i bruk, og deres persistente representasjon på fil eller i en database. 
+
+\end{enumerate}
+
+Den andre av disse er konstruksjonsmessig knyttet til kravet om flerbrukerstøtte, som vi etter hvert skal se i de etterfølgende kapitlene. Kapittel 3.1 beskriver en overordnet systemarkitektur for de som har både SU, DB og KTN. For de som ikke tar DB, KTN og / eller MMI, vil det være noen endringer som er beskrevet i Kapittel 3.5.
+
+\subsection{Trelags applikasjonsarkitektur}
+
+Det er vanlig å dele applikasjoner i tre deler, med hver sin funksjon (se Figur 2):
+
+\begin{enumerate}
+
+\item
+Brukergrensesnittet, i vårt tilfelle et GUI, er den delen som brukeren interagerer direkte med gjennom bl.a. skjerm, mus og tastatur. GUI gir brukeren mulighet for å navigere i og se på data og gir tilgang til funksjoner for å endre dataene. Strukturen på GUI er nært knyttet til strukturen til de dataene, slik den er beskrevet i f.eks. et UML klassediagram, men først og fremst basert på hva brukeren ønsker å gjøre. Implementasjonen av GUI gjøres ofte ved hjelp av et GUI-rammeverk og som regel i samme programmeringsspråk som applikasjonen forøvrig, i vårt tilfelle Java og Swing.
+
+\item
+Modellen er alle objektene i den kjørende applikasjonen som brukeren er interessert i å få tilgang til. Disse objektene eksisterer uavhengig av om GUI viser dem, og det er ikke umulig eller unaturlig å ha flere typer brukergrensesnitt som gir tilgang til de samme applikasjonsdataene, eller kun deler av disse. Modellen inneholder både data og regler for hvordan disse kan manipuleres, og sistnevnte kalles ofte applikasjonslogikk. Modellen vil typisk være beskrevet ved hjelp av UML klassediagram, som et ledd i analysearbeidet i forbindelse med. kravspesifikasjonen. Dersom en bruker et objektorientert språk som Java, vil både data og logikk implementeres vha. klasser. 
+
+\item
+Persistensdelen håndterer lagring av modellen mellom hver kjøring av applikasjonen, og er typisk støttet av en database eller et filsystem. Igjen er det ikke umulig eller unaturlig å tenke seg at de samme dataene kan lagres på ulike vis av en og samme applikasjon, f.eks. som en XML-fil, i en XML-database eller i en relasjonsdatabase. Førstnevnte passer bra for dokumentorienterte enbrukerapplikasjoner, sistnevnte passer bra for flerbrukerapplikasjoner med mer komplekse data og spørringer, og hvor det kan være behov for transaksjonshåndtering. Beskrivelsen av de persistente dataene er avhengig av den underliggende mekanismen, og kan være XML-dtd og –skjema og ER-diagram og SQL-skript.
+
+\end{enumerate}
+
+Ved konstruksjon er det viktig å tenke på både den interne strukturen i hver av de tre delene, som gjerne følger bestemte regler eller mønster for konstruksjon, og grensesnittet og samspillet mellom dem. Den interne strukturen i brukergrensesnittet og forholdet mellom brukergrensesnittet og modellen er en sentral del av MMI-faget. DB-faget tar for seg forholdet mellom applikasjonen og databasebasert persistens og struktur og egenskaper for databasen. Dersom disse tre delene av applikasjonen er skilt fra hverandre med et nettverk, har KTN-faget sitt å si om hvordan dette bør håndteres. SU-faget har den modellen/applikasjonslogikken og den overordnede strukturen eller arkitekturen, som sitt anliggende.
+
+\subsection{Fra enbrukerapplikasjon til klient-tjener-arkitektur}
+
+Applikasjonsarkitekturen som er beskrevet over, er et greit utgangspunkt for å konstruere en enbrukerapplikasjon. I dette prosjektet kan en forestille seg at en i første omgang støtter filbasert lagring med XML som format, som illustrert i Figur 3.
+
+I en dokumentorientert applikasjon vil hele modellen bli lagret som en transaksjon, og grensesnittet mellom modellen, dvs. de to pilene, vil være nokså enkelt. Den venstre pilen representerer funksjonen modell-til-XML-oversetting, mens den høyre pilen tilsvarer den motsatte funksjonen XML-til-modell-oversetting. Merk at funksjonene håndterer kun hele modeller, så det er ikke behov for å oversette delmodeller i den ene eller andre retning. Det kan selvsagt være lurt å bryte funksjonene ned i mindre deler, basert på modellens struktur, men dette er konstruksjonsdetaljer som ikke påvirker grensesnittet representert ved pilene.
+
+En ulempe med denne applikasjonsarkitekturen er at XML-filer ikke kan leses eller skrives over nettverket (med mindre en utnytter nettverkstøtten i filsystemet), f.eks. http- eller ftp-URL’er. Det skal imidlertid ikke så mye endring til for å håndtere dette, som vist i Figur 4.
+
+Her vil klientapplikasjonen være så godt som uendret. Den eneste forskjellen er at lesing og skriving av XML-dokumentet skjer over nettverket, ved hjelp av en eller annen protokoll. Dersom en bruker URL-er til å adressere tjeneren og Java sin innebygde støtte for lesing og skriving til URL-oppkoblinger, så er det lite omkoding som trengs. I tillegg er det et stort poeng at endringen er intern i persistensdelen, så GUI og modellen er ikke berørt, kanskje bortsett fra dialogelementer for visning og innskriving av URL-en.
+Tjeneren vil i dette tilfellet være nokså enkel, da den kun skal kunne ta i mot en oppkobling og kunne lese fra og skrive til nettverket og henholdsvis skrive til og lese fra fil.
+
+Dersom en deler opp persistensdelen i en del som håndterer oversettingen til og fra XML og en del som håndterer lesing og skriving, er det relativt enkelt å få til en kombinasjon av disse to. Dette er vist i Figur 5.
+
+Dette krever at overgangen mellom XML-oversettingen og lesing/skriving av XML-dokumentet er tydelig, f.eks. definert i et eget Java-grensesnitt og at en har klasser for filbasert og nettverksbasert I/O som implementerer dette grensesnittet. Dette tilsvarer forøvrig arkitekturen til først inkrement, med HTTP som nettverksprotokoll.
+
+Selv om vi i de to siste figurene har innført en tjener, er tjeneren såpass enkel at arkitekturen ikke håndterer at flere brukere får tilgang til de samme dataene. Rollen til tjeneren er foreløpig kun knyttet til lagring og ikke til delt tilgang for flere klienter til felles data. For å få det til er det vesentlig at tjeneren også har et modell-lag og mekanismer for å håndtere delt tilgang. Figur 6 skisserer en arkitektur for å håndtere dette, men figuren forteller bare en del av historien.
+
+Merk at modellene kan godt være implementert av akkurat de samme klassene og vi kan godt bruke XML som overføringsformat. I tillegg til å innføre et modell-lag i tjeneren, er det viktig å definere regler for samspillet mellom tjenerens modell og modellen i hver klient:
+
+\begin{enumerate}
+
+\item
+Tjenerens modell er den offisielle modellen.
+
+\item
+Klientene må ved hver vesentlige endring lokalt, overføre endringen til tjeneren, for å unngå inkonsistens mellom lokal og offisiell modell.
+
+\item
+Tjeneren må, når den mottar endringer fra en klient, integrere endringene i sin modell, og videreformidle endringene til de andre klientene.
+
+\item
+Klientene må være beredt til å motta endringer fra tjeneren og integrere disse i sin egen lokale modell.
+
+\end{enumerate}
+
+Kommunikasjonen mellom tjeneren og klientene har altså som formål å sikre konsistens mellom lokale modeller og den tjenerens offisielle, og dataene som sendes over nettverket må være tilpasset dette formålet, for eksempel:
+
+\begin{enumerate}
+
+\item
+Både tjeneren og klientene må kunne overføre fragmenter av modellen og ikke bare hele modellen som i enbrukerapplikasjonen
+
+\item
+Overføringen må inneholde informasjon om hva slags endring som skal gjøres i den andre enden, f.eks. slette, oppdatere eller opprette objekter
+
+\item
+En må kunne angi hvilke deler av den offisielle modellen som skal endres, f.eks. hvilket attributt som skal endre, hvilket objekt som skal slettes eller hvilken relasjon som skal opprettes
+
+\end{enumerate}
+
+Det som overføres i begge retninger mellom klient og tjener kan sees på som en kommando med tilhørende data, og en viktig del av designarbeidet er å definere kommandoene slik at dekker behovene over og bestemme hvordan de skal kodes i XML og formidles over HTTP.
+
+Som vi ser er persistenslaget omdøpt til kommunikasjon i figuren over, men det betyr ikke at persistens er mindre viktig. Vi må fortsatt sikre at dataene overlever når applikasjonen avslutter, så persistensmekanismen må gjeninnføres, slik vi har vist i Figur 7.
+
+For å sikre at modellen kan gjenopprettes hvis tjeneren krasjer, er det viktig at databasen blir oppdatert i takt med tjenerens modell. Hvilken som oppdateres først, modellen eller databasen, er en smakssak, men begge bør gjøres før klientene oppdateres, for å minimere muligheten for at krasj underveis. Det overordnede poenget er at det er databaseinnholdet som er grunnlaget for å gjenopprette modellen ved krasj eller vedlikehold av tjeneren. Derfor er databasen til syvende og sist mer ”offisiell” enn modellen i den kjørende tjeneren, siden det er den vi sitter igjen med når strømmen slås av.
+
+
 \end{document}
