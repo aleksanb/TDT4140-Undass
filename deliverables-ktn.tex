@@ -1,0 +1,79 @@
+\section{TTM4100 Kommunikasjon, tjenester og nett (KTN)}
+
+\subsection{TTM4100: Communication Services and Networks}
+
+In the recent years, the KTN project has been a part of the Common project. However, as most groups have been doing it separately and are not using the implementation for the networking layer of their application, the KTN project will now stand on its own. However, there are many elements which can be re-used because the implementation should be language-agnostic.
+
+Hence, it could be modified and reused to fit the data models that are used in the common 
+project (which will probably be implemented in Java). 
+In this project, you will create a chat server and client that communicate over a simple 
+proprietary application-layer protocol on top of TCP. The main purpose of this project is to implement a protocol, so it is not strictly necessary that you use a certain programming language. A protocol is by definition a design that enables different systems, languages or endpoints to speak together using a common, shared language. 
+
+To test your implementation, we will simply check that the protocol is implemented correctly 
+according to the requirements specification. However, since the curriculum is based on python, and the language is used throughout the course, it will also be used in the skeleton code provided in this project. It is also very likely that the course staff will be able to provide the best help and assistance if you implement the project using python.
+
+The goal of this new project is to have a practical and useful approach to network programming. Previously in this course, a lot of emphasis was put on very detailed and technical aspects of lower-level network programming. However, in recent years, there are made available very good open source libraries for most of these tasks that does all the heavy lifting for us. We believe that using and learning some of these libraries in this project will prove useful for you in the future as well as for your own programming projects. 
+
+\subsection{Additional documents}
+
+You can find detailed requirements, documentation and skeleton code on TTM4100's itslearning page. 
+
+\begin{enumerate}
+
+\item
+Description.pdf : An extended version of this document, with requirements and protocol description. 
+
+\item
+Documentation.pdf : Documentation of socket programming and JSON in python. 
+
+\item
+Skeleton.zip : Skeleton code for the chat client and server.
+
+\end{enumerate}
+
+\subsection{Deadlines and deliverables}
+
+All deliveries are made on itslearning.
+
+\subsubsection{KTN1: (Project plan)}
+
+How will it be implemented? 
+
+\begin{enumerate}
+
+\item
+Classes diagrams 
+
+\item
+Sequence diagrams 
+
+\item
+Login 
+
+\item
+Send message from client 
+
+\item
+Logout 
+
+\end{enumerate}
+
+We would prefer if you could deliver this as one pdf file. 
+
+Deadline: 03.03.2014 (Monday of week 10) 
+
+\subsubsection{KTN2: Deliver a working implementation}
+
+Deliver the code for your chat client and server packed in a zip file. 
+
+Include any non-standard libraries used by your code. For example, if you use an external 
+JSON library for java. 
+
+Also include a simple readme that explains how to use your chat server and client. 
+
+If your implementation differs from your KTN1 design, please update KTN1 to match your 
+implementation, and redeliver it as a pdf along with the zip file. 
+
+If you follow the defined protocol we should be able to test your implementation by connecting to our own client/server implementation. 
+
+Deadline: 24.03.2014 (Monday of week 13)
