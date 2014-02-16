@@ -346,5 +346,100 @@ Som vi ser er persistenslaget omdøpt til kommunikasjon i figuren over, men det 
 
 For å sikre at modellen kan gjenopprettes hvis tjeneren krasjer, er det viktig at databasen blir oppdatert i takt med tjenerens modell. Hvilken som oppdateres først, modellen eller databasen, er en smakssak, men begge bør gjøres før klientene oppdateres, for å minimere muligheten for at krasj underveis. Det overordnede poenget er at det er databaseinnholdet som er grunnlaget for å gjenopprette modellen ved krasj eller vedlikehold av tjeneren. Derfor er databasen til syvende og sist mer ”offisiell” enn modellen i den kjørende tjeneren, siden det er den vi sitter igjen med når strømmen slås av.
 
+\subsection{Arkitektur og Java-programmering}
+
+Overgangen fra abstrakte arkitekturfigurer som vist over, til praktisk Java-koding kan kanskje virke vanskelig. Dette får dere mer informasjon om på (øvings?)forelesningene, men her er to vesentlige tips å ta med seg:
+
+\begin{enumerate}
+
+\item
+Arkitekturen er en funksjonell nedbrytning av applikasjonen, og denne nedbrytningen kan være grei å bruke når en skal definere Java-pakkestrukturen for prosjektet. F.eks. kan en ha en A-pakke på toppen med pakker for GUI, modell og persistens under. Alle GUI-klasser vil ha A.gui som pakkeprefiks, for eksempel A.gui.ProduktPanel, mens modellklassene vil ha A.modell som pakkeprefiks, for eksempel A.modell.Produkt.
+
+\item
+Definer koblingen mellom lagene i arkitekturen ved hjelp av Java-interface, for eksempel A.persistens.ModellLeser og A.persistens.ModellSkriver for lesing og skriving av modellen. Implementasjonen av disse grensesnittene kan godt ligge i egne underpakker, f.eks. A.persistens.fil.Model.ModellLeserImpl og A.persistens.fil. ModellSkriverImpl.
+
+\end{enumerate}
+
+\subsection{Databaselagring}
+
+Data skal lagres i en relasjonsdatabase, som tjeneren kommuniserer med ved hjelp av JDBC. Alle endringer som skjer i systemet, f. eks. at  en ny avtale legges inn, skal føre til at databasen oppdateres for å reflektere den nye situasjonen. Tjeneren skal kunne krasje eller skrus av, og deretter skrus på igjen, uten at data går tapt. Tjeneren skal lese inn data fra databasen når den starter opp.
+
+Data som tjeneren tar imot fra klienten er strukturert som XML. Denne skal derfor analyseres av tjeneren, og informasjonen i den legges inn i databasen på en hensiktsmessig måte. En del av prosjektoppgaven er å utforme en hensiktsmessig datamodell, implementere denne i en SQL-database, og lage et program som fyller den med data på grunnlag av XML-filen. 
+
+Tjeneren og databasen skal kommunisere ved hjelp av JDBC, som er standardbiblioteket for databasekommunikasjon i Java. JDBC vil bli forelest i TDT4145 Datamodellering og databasesystemer.
+
+All informasjon som tjeneren sender til klientene/gateway skal være korrekt i henhold til databasen. En mulig måte å gjøre dette på, er å utføre spørringer mot databasen hver gang. Å cache deler av data i tjeneren kan være mer effektivt, men kan også øke kompleksiteten. Dere står imidlertid fritt til å implementere dette slik dere finner det for godt.
+
+\subsection{Endringer i krav for grupper som ikke har alle fagene}
+
+\begin{enumerate}
+
+\item
+For de som ikke har DB skal all persistens bli ivaretatt av filsystemet. 
+
+\item
+De som ikke har MMI må selv lage et enkelt brukergrensesnitt for å kunne teste systemet. Dette brukergrensesnittet kan gjerne være kommandobasert. 
+
+\item
+Alle krav i kravlista relatert til nettverk utgår for de som ikke har KTN. 
+
+\end{enumerate}
+
+\subsection{Eksempelkode for et personregister – ”kjerneapplikasjonen”}
+
+Eksempelkoden er en enkel adressebok der brukeren kan legge til, fjerne og redigere en liste med personer og tilhørende personalia som fødselsdag og e-postadresse. Vi har tradisjonstro valgt å kalle denne for ”kjerneapplikasjonen”, men er hovedsakelig ment som en resurs hvor gruppene kan plukke kodesnutter og/eller se eksempler på hvordan ting kan implementeres. Noe av tanken bak dette er også å gi dere trening i å sette dere inn i andres/eksisterende kode.
+
+\subsubsection{Installasjon}
+
+Eksempelkoden/kjerneapplikasjonen er gjort tilgjengelig som ei zip-fil på Web/it’s learning. Gjør følgende for å få tilgang til kildekoden fra zip-fila i Eclipse:
+
+\begin{enumerate}
+
+\item
+Pakk ut fila kjerne.zip (dobbeltklikk på fila i Utforsker) i en midlertidig katalog (f.eks. m:\textbackslash tmp\textbackslash ).  Denne midlertidige katalogen kan ikke være den samme som du velger som Workspace i steg 2. Fila oppretter en ny katalog, kjerne, i den valgte katalogen (f.eks. m:\textbackslash tmp\textbackslash kjerne\textbackslash )
+
+\item
+Start Eclipse. I Workspace Launcher som kommer opp ved oppstart velger du Workspace-katalogen der du har kildekoden din (f.eks. m:\textbackslash eclipse).  Opprett en katalog om du ikke allerede har en katalog til kildekoden din.
+
+\item
+Opprett et Eclipse-prosjekt for kjerneapplikasjonen
+\begin{enumerate}
+
+\item
+I Eclipse, opprett et nytt prosjekt for kjerneapplikasjonen ved å velge File - New - Project.  Dialogboksen New Project kommer opp.
+
+\item
+I dialogboksen New Project velger du Java Project og klikker Next>.
+
+\item
+Kall prosjektet ”kjerne” (føres i innskrivingsboksen Project name) i neste skjermbilde, og klikk Finish.
+
+\end{enumerate}
+
+\item
+Importer kildekoden til kjerneapplikasjonen inn i Eclipse-prosjektet
+
+\begin{enumerate}
+
+\item
+Importer kjerneapplikasjonen ved å velge File -> Import.  Dialogboksen Import kommer opp.
+
+\item
+I dialogboksen velg 'File system' under Select an import source:, og klikk Next
+
+\item
+I innskrivingsboksen From directory skriver du enten inn stien der du pakka ut kjerne.zip (f.eks. m:\textbackslash tmp\textbackslash kjerne\textbackslash ) eller bruker Browse-knappen for å finne katalogen.
+
+\item
+Klikk på knappen Select all og så Finish.
+
+\item
+Svar Yes to all på eventuelle spørsmål som dukker opp under importeringa av kildekoden.
+
+\end{enumerate}
+
+\end{enumerate}
+
+Du har nå tilgang til kildekoden i Eclipse.
 
 \end{document}
