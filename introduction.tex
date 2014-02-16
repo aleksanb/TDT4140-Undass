@@ -1,0 +1,134 @@
+\section{Introduksjon til fellesprosjektet}
+\subsection{Hva er ”fellesprosjektet”?}
+
+Velkommen til fellesprosjektet for de fire fagene: TTM4100 - Kommunikasjon, TDT4140 - Systemutvikling, TDT4145 - Datamodellering og databasesystemer og TDT4180 - Menneske-maskin-interaksjon (MMI). Fellesprosjektet utgjør en del av det obligatoriske øvingsopplegget i disse fire fagene, og består av to store innleveringer i løpet av semesteret. Merk at studenter som kun tar noen av disse fire fagene, enten har en begrenset variant av fellesprosjektet, eller har egne obligatoriske øvinger innenfor hvert fag. Det er satt av i alt fire uker til fellesprosjektet – de to første ukene til planlegging og design, og de to neste ukene til implementering og testing. I disse to periodene vil det ikke være forelesninger i de fagene som er involvert i fellesprosjektet. 
+
+Fellesprosjektet er viktig av flere grunner: Det gir muligheten til å lære og å praktisere teorien i fire fag, dere får erfaring med prosjektformen for organisering av arbeid, og dere får jobbe i grupper, med alt det måtte føre med seg av gleder og sorger. De fleste vil i ettertid huske fellesprosjektet som et strevsomt og givende fag, det har i hvert fall vært tilbakemeldingen fra tidligere studenter. 
+
+Resten av dette kapittelet introduserer oppgaven og gir informasjon om relevante metoder og prosesser. Kapittel 2 forteller hva slags system vi skal utvikle og hva systemet skal brukes til. I kapittel 3 konkretiseres de funksjonelle kravene som stilles til systemet, dvs. alt som brukeren ønsker å kunne utføre. I kapittel 3 beskrives strukturen / arkitekturen til systemet, og andre krav som stilles til konstruksjonen, de ikke-funksjonelle kravene. I kapittel 4 detaljeres kravene som fellesprosjektet setter til sine innleveringer. I kapitel 5 detaljerer vi kraven som fellesprosjektet setter til MMI. Kapitel 6 lenker til viktige momenter for KTN delen av fellesprosjektet, som funksjonelle krav, krav til innleveringer i dette faget og en beskrivelse av planlagt løsning for kommunikasjonsdelen. Kapitel 7 beskriver databasedelen. 
+
+I tillegg har kompendier et vedlegg som behandler UML (Vedlegg A). 
+
+\subsection{Rammer for prosjektet}
+
+Prosjektet tar sikte på å gi dere praktisk og realistisk erfaring i prosjektbasert systemutvikling, men rammen for faget tilsier at realismen blir begrenset1.
+I arbeidslivet ville det innledningsvis i et prosjekt være ganske stor usikkerhet med tanke på hva som skal gjøres – for eksempel kundens behov og krav til systemet. Mye av utviklingsjobben vil være å analysere kundens problem, vurdere hvilken rolle og funksjoner et system bør ha for å bidra til å løse kundens problemer og om det hele tatt kunne løses på en effektiv måte, og så velge passende utviklingsmetoder, programmeringsspråk, verktøy og lignende. I fellesprosjektet er imidlertid frihetsgradene sterkt reduserende fordi:
+
+\begin{enumerate}
+\item
+Med for stor frihet vil mange grupper kunne ta feil veivalg i starten, noe som gjør at de ikke greier å fullføre på en fornuftig måte. Selv blant profesjonelle programvareutviklere er en god del prosjekter langt fra vellykkede, og dere befinner dere ennå på et tidlig stadium i en lang utdanning.
+
+\item
+Hvis alle prosjekter får lov til å utvikle seg i helt ulike retninger, vil dette kreve veiledningskapasitet som vi verken har finanser eller personellressurser til. Det ville også være vanskelig å oppdrive reelle kunder for så mange grupper.
+
+\end{enumerate}
+
+Følgelig er det i dette prosjektet lagt klare begrensninger på hva og hvordan:
+
+\begin{enumerate}
+\item
+Det finnes ingen ordentlig kunde. Kravene til produktet er spesifisert på forhånd. Det blir derfor ingen kravspesifikasjonsfase. Hovedvekten ligger på fasene konstruksjon, implementasjon og testing.
+
+\item
+Tidsfristene for levering av delprodukter er gitt av oss. Dermed påtvinges alle grupper en viss oppdeling av produktet og fast progresjon i arbeidet, noe som gjør det langt lettere for oss å hjelpe de av dere som får problem på et eller annet tidspunkt. Ulempe med dette er at utviklingsmodell kan fort tolkes som Fossefallsmodellinspirert mens de fleste (både studenter, aktører i næringslivet, og forskere) er enige i at Fossefallsmodellen er en utdatert modell. Det er viktig å understreke at faste tidsfrister og sekvensering av konstruksjon, implementasjon og testing er et pedagogisk valg.
+
+\end{enumerate}
+
+Prosjektet skal utføres i grupper à 4-6 personer. Gruppesammensetningen bestemmes av oss, uten hensyn til hvem dere helst ville ha ønsket å samarbeide med. Det gis ikke karakter, bare bestått/ikke-bestått (tilsvarende bokstavkarakterene A-E/F), og normalt evalueres hele gruppen under ett. I ekstreme tilfeller av ikke-deltagelse vil det bli aktuelt å stryke enkeltpersoner. Man må bestå fellesprosjektet for å få adgang til eksamen i de involverte fagene. Grupper eller personer som står i fare for å stryke, vil få advarsel to uker før siste innlevering – det skal ikke komme som et sjokk like før eksamen. Viss man gjør sitt beste, behøver man ikke være redd for at man ikke skal greie å bestå. Det lønner seg imidlertid å sikte mot bedre enn akkurat bestått karakter, siden den praktiske kunnskapen vil være nyttig i hvert fag sin eksamen, og i fag og oppgaver senere i studiet.
+Vi bruker systemet (http://www.idi.ntnu.no/emner/fellesprosjekt/grupper/registrer.php3) for en effektiv deling i grupper. Ellers benytter Fellesprosjektet it’slearning for innleveringer.
+
+\newpage
+
+\subsection{Leveranser}
+
+\begin{table}[h]
+\begin{tabularx}{\textwidth}{ l X X l }
+
+\hline
+\hline
+Fase & Innlevering & Beskrivelse & Frist \\
+\hline
+
+Fase 1
+&
+PU 1: Prosjektplan &
+Prosjektplan i henhold til krav i kapitel 4.1 &
+TBA \\
+
+&
+PU 2: Systemtestplan &
+Systemtestplan i henhold til krav i kapitel 4.1 &
+TBA \\
+
+&
+DB 1: Konseptuelt skjema &
+ER-modell &
+2014-03-06 \\
+
+&
+PU 3: Overordnet design &
+Overordnet design &
+TBA \\
+
+&
+MMI D2.1: Brukbarhetstesting &
+Godkjenning av pilottest øving &
+TBA \\
+
+&
+MMI D2.2 &
+Rapport fra brukbarhetstest av papirprototyp &
+TBA \\
+
+Fase 2
+&
+KTN 1 &
+Project plan (Se kap. 6.3.1). &
+2014-03-03 \\
+
+&
+DB 2: Logisk databaseskjema &
+SQL-script for oppretting av database &
+2014-03-14 \\
+
+&
+PU 4: Programvare &
+Implementasjon og testing av systemet &
+TBA \\
+
+&
+MMI D3 &
+Skjermdesign og konstruksjon. &
+2014-03-14 \\
+
+Fase 3
+&
+PU 5: Dokumentasjon &
+Sluttrapport i henhold til krav i kapitel 4.3 &
+TBA \\
+
+&
+KTN 2 &
+Deliver a working implementation (Se kap. 6.3.2). &
+2014-03-24 \\
+
+\hline
+
+\end{tabularx}
+\caption{Deliverables for the Common project}
+\end{table}
+
+Den informasjonen dere finner i dette kompendiet var riktig i det kompendiet gikk i trykken. Det hender imidlertid at ting forandrer seg, inkludert innleveringsfristene, og derfor er det viktig at dere jevnlig sjekker for nye versjoner av kompendiet.
+
+Lenker til respektive nettsted:
+\begin{enumerate}
+\item Fellesprosjektet: http://www.idi.ntnu.no/emner/fellesprosjekt
+
+\item TTM4100 – Kommunikasjon, tjenester og nett: http://www.item.ntnu.no/fag/ttm4100/ 
+
+\item TDT4140 - Programvareutvikling: http://www.idi.ntnu.no/emner/tdt4140/
+
+\item TDT4145 - Datamodellering og databasesystemer: http://www.idi.ntnu.no/emner/tdt4145/
+
+\item TDT4180 - MMI og grafikk: http://www.idi.ntnu.no/emner/tdt4180/
+\end{enumerate}
