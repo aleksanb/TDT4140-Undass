@@ -12,12 +12,18 @@ module ::Guard
 
         def run_all
             puts "Rebuilding project"
-            `make`
+            make
         end
 
         def run_on_changes(paths)
             puts "Rebuilding project"
-            `make`
+            make
+        end
+
+        def make
+            puts `make`
+            #stdin, stdout, stderr = Open3.popen3('make')
+            #puts stdout
         end
     end
 end
