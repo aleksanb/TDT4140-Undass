@@ -1,0 +1,81 @@
+\section{Innleveringer i TDT4180 Menneske-maskin-interaksjon}
+
+Merk: Dette kapitlet gjelder kun for de som tar fellesprosjektet. De som tar faget TDT4180 uten å være del av fellesprosjektet har eget opplegg for øvingene D2 og D3 som finnes på fagets web sider / It’s Learning.
+
+\subsection{Introduksjon}
+
+Design av brukergrensesnitt kan gis en større eller mindre rolle i et utviklingsprosjekt. I TDT4180 er det faglige utgangspunktet at design av brukergrensesnitt i liten grad kan skilles fra spesifikasjon av systemet som helhet. ISO sin definisjon av brukskvalitet (eng: usability) er basert på tre grunnleggende begreper: funksjonalitet (hva systemet lar brukeren gjøre, eng: effectiveness), effektivitet (hvor (ressurs)krevende systemet er i bruk, eng: efficiency) og tilfredsstillelse (hvordan det oppleves å bruke systemet, eng: satisfaction). 
+
+Brukerens totalopplevelse av et system (”brukeropplevelsen”) er en kombinasjon av disse kvalitetsmålene, og dersom en brukergrensesnittdesigner skal stå ansvarlig for denne opplevelsen, er det grunnleggende konseptet for systemet delvis hennes oppgave å utforme, selvsagt i samarbeid med andre. I vårt tilfelle betyr dette at dere som skal lage implementasjonen ideelt sett burde ha vært med på skrive kravspesifikasjon. 
+
+Av mange gode grunner er dette ikke tilfelle i fellesprosjektet, så vekten i MMI-delen av fellesprosjektet blir på å gjøre funksjonaliteten lett tilgjengelig for brukeren og å utvikle praktiske ferdigheter i programmering med Java og Swing-rammeverket.
+
+Det er totalt 7 øvinger i TDT4180. Kun de to siste av disse (øvingene D2 og D3) er del av fellesprosjektet.
+
+\subsection{Øving D2: Brukbarhetstest av papirprototyp}
+
+Denne innleveringen skal inneholde en såkalt papirprototyp av deler av brukergrensesnittet til fellesprosjektapplikasjonen. Bruk scenariene 1-4 i kap. 3.3.  Papirprototypen skal brukbarhetstestes med en annen gruppe i prosjektet. 
+
+Metoder for å lage papirprototyper og gjøre såkalte ”Wizard of Oz”-brukbarhetstester vil bli gjennomgått i MMI-faget (se forøvrig vedlegg).
+
+\begin{enumerate}
+
+\item
+Hver gruppe vil få tildelt en studentassistent.
+
+\item
+Når gruppen har fått klar en papirprototyp og har planlagt brukbarhetstesten så skal det hele pilottestes med studentassistent innen en viss frist.
+
+\item
+Tidspunkt og sted for pilottesting må avtales med studentassistent.
+
+\item
+Pilottesten må godkjennes før gruppen får lov til å fortsette med testing av papirprototypen på medstudenter.
+
+\end{enumerate}
+
+Innleveringen i øving D2 skal være en doc eller pdf fil som inneholder:
+
+\begin{enumerate}
+
+\item
+Beskrivelse av brukergrensesnittet med bilder av papirprototypen og tilhørende tilstandsdiagrammer.
+
+\item
+Beskrivelse av oppgavene og scenariene som ble brukt i brukbarhetstesten.
+
+\item
+Hvem var med i testen og hvordan ble den gjennomført?
+
+\item
+Resultat fra brukbarhetstesten.
+
+\item
+Forslag til redesign av brukergrensesnittet basert på erfaringene fra testen (dersom det dukket opp problemer).
+
+\end{enumerate}
+
+Redesignet fra øving D2 skal ligge til grunn for det som skal beskrives nærmere og konstrueres i D3-øvingen og som til sist skal realiseres innenfor fellesprosjektet. 
+
+Utfyllende bakgrunnsmateriale finnes på fagets itslearning side for denne øvingen.
+
+\subsection{Øving D3: Skjermdesign og konstruksjon av brukergrensesnittet}
+
+Denne innleveringen består av tre deler
+
+\begin{enumerate}
+
+\item
+Konseptuell modell. Dere skal her beskrive de begrepene brukeren skal forholde seg til i applikasjonen. Bruk UML for å beskrive klassene, datafeltene i klassene, arv, og relasjoner.
+
+\item
+Skjermdesign. Dere skal her ta utgangspunkt i kravspesifikasjonen og scenariene fra øving D2. I innleveringen skal dere beskrive grafisk struktur og utforming, kobling mot konseptuell modell, og hvordan alle deler av applikasjonen reagerer på relevante hendelser, som museklikk og tastetrykk. Målet er å spesifisere brukeropplevelsen, dvs. hva brukeren til enhver tid ser og kan gjøre.
+
+\item
+Konstruksjonsbeskrivelse. Mens skjermdesignet fokuserer på brukerens opplevelse, skal dere her beskrive hvordan brukergrensesnittet er bygd opp, dvs. hvilke vinduer og dialogelementer som utgjør grensesnittet, og hvordan disse er koblet sammen i et hierarki og kommuniserer vha. metodekall og hendelser. Her er altså fokuset hvordan konstruksjonselementene fra Swing-rammeverket benyttes for å realisere brukergrensesnittet. Detaljeringsnivået skal tilsvare formuleringen av konstruksjonsøvingene og i prinsippet gjøre det mulig å skrive en funksjonstest vha. JUnit/JFCUnit-rammeverket.
+
+\end{enumerate}
+
+Detaljert beskrivelse av notasjon, samt eksempler, finnes på fagets itslearning side for denne øvingen.
+
+\newpage
