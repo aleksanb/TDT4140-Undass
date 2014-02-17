@@ -11,6 +11,26 @@ Figur \ref{fig:high-level-architecture}  viser et høynivå systemarkitektur ove
     \label{fig:high-level-architecture}
 \end{figure}
 
+\subsection{Scenarioer}
+
+Scenarioene er ikke en del av kravspesifikasjonen, men skisserer noen typiske bruksscenarier for kalendersystemet, som vil støttes dersom kravene oppfylles.
+
+\begin{enumerate}
+
+\item
+Per har invitert tre forretningsforbindelser til samtaler i egne lokaler førstkommende fredag klokka 12 til 14. Per legger inn dette som en avtale i kalenderen sin, legger inn kollegaen Siv som deltaker (han ser hun er ledig da) og får kalendersystemet til å booke et ledig møterom som er passe stort for fem deltakere.
+
+\item
+Siv får en telefon om at hun må delta på et møte hos et eksternt møte hos en oppdragsgiver. Mens hun prater i telefonen, legger hun møtet inn i kalenderen sin. Hun ser at det overlapper med møtet som Per har lagt henne inn i, og siden det eksterne møtet har prioritet, så går hun inn på gruppemøtet og markerer at hun ikke kan delta.
+
+\item
+Per ser at det dukker opp et varsel om at Siv har angitt at hun ikke kan delta, så han sletter henne og legger inn Beate istedet. Beate får på sin side dette opp som et møteforslag i sin kalender og bekrefter at hun kan stille.
+
+\item
+En av de tre forretningsforbindelsene ringer og sier at alle tre blir forsinket med én time. Per angir dette i møteinnkallingen og siden systemet viser at møterommet som var booket, er opptatt da, så ber han systemet om å finne et nytt. Beate får melding om endringen, og forholder seg til det, men siden hun er på farta så sender hun en tekstmelding om at det går greit. Per markerer da for henne at hun kommer.
+
+\end{enumerate}
+
 \subsection{Krav til kalendersystemet}
 
 I tillegg til at de ansatte skal kunne planlegge dagene sine med å legge inn avtaler i kalenderne, er hensikten med kalendersystemet å forenkle innkalling til møter. I dag bruker de ansatte i Firma X mye tid på å koordinere intern-møter i organisasjonen. Tiden går med på å finne tidspunkt som passer for alle møtedeltakere, samt å reservere møterom. Kalendersystemet skal administrere innkalling til møter og reservasjon av møterom.
@@ -21,25 +41,27 @@ I tillegg til at de ansatte skal kunne planlegge dagene sine med å legge inn av
 Logge på. Ansatte får tilgang til kalendersystemet ved å logge seg på kalenderklienten med brukernavn og passord.
 
 \item
-Legge inn avtale. Ansatte skal kunne legge inn avtaler i kalenderene sine. En avtale legges inn på avtaledato med et start- og sluttidspunkt, samt en kort beskrivelse av avtalen ("Bil på verksted") og eventuelt sted for avtalen ("Strandveien Auto").
+Legge inn avtale. Ansatte skal kunne legge inn avtaler i kalenderen sin. En avtale legges inn på avtaledato med et start- og sluttidspunkt alternativt start-tidspunkt og varighet, samt en kort beskrivelse av avtalen ("Bil på verksted") og eventuelt sted for avtalen ("Strandveien
+>Auto"). Det skal være lov å legge inn flere avtaler for overlappende tidspunkt.
 
 \item
-Slette avtale. Ansatte skal kunne slette en avtale som ligger i en av kalenderene sine.
+Håndtere møtedeltakere. Den som har lagt til en avtale skal også kunne legge til (eller fjerne) (potensielle) deltakere, ved å angi enkeltpersoner og/eller grupper. Grupper administreres utenfor systemet og kan ses på som en samling personer uten noen spesiell struktur (roller/hierarkier). Inviterte deltakerne skal kunne bekrefte evt. avkrefte at de deltar. Dersom en deltaker avkrefter deltakelse, så kan han/hun også velge om den skal skjules i kalenderen sin.
 
 \item
-Endre avtale. Ansatte skal kunne endre på en avtale som ligger i en av kalenderene sine. Alle feltene kan endres.
+Endre avtale. Ansatte skal kunne endre på avtaler de har opprettet. Alle feltene kan endres. Alle deltakere blir varslet om endringen (på en eller annen måte), så de kan forholde seg til det og evt. endre på om de deltar eller ikke.
 
 \item
-Kalle inn til møte. En ansatt skal kunne kalle andre ansatte og grupper i Firma X inn til et møte. Den som kaller inn til møte kalles en møteleder. En ansatt skal kunne kalle inn til møte på samme måte som han/hun legger ny avtale inn i en kalender. I tillegg til feltene for en vanlig avtale, inneholder også møteinnkallingen en liste over innkalte møtedeltakere. 
+Slette avtale. Ansatte skal kunne slette avtaler de har opprettet, og disse forsvinner da fra kalenderen til alle deltakere.
 
 \item
-Motta møteinnkalling. Når en ansatt mottar innkalling til et møte, kan han/hun svare 'Godta' eller 'Forkast'. Ved å svare 'Godta', legges møteinnkallingen inn som en avtale i den innkalte ansattes kalender. Om den ansatte svarer 'Avslag', sendes svar tilbake til møtelederen om at innkallingen ikke er godtatt. Møteleder kan da velge å finne et nytt tidspunkt, avlyse møtet (se under) eller fjerne deltakeren fra innkallingslista.
+Reservere møterom. I stedet for å skrive inn sted for en avtale eller et møte, skal brukeren kunne velge møterom blant de som er ledige i det angitte tidsrommet. Ved endring av tidsrommet, skal kalendersystemt automatisk reservere møterommet for det nye tidrommet, men ikke holde på
+>det om andre har reservert det da. Det skal være mulig å angi antall deltakere som rommet skal kunne ta, uavhengig av antallet deltakere som er invitert og evt. har bekreftet at de kommer.
 
 \item
-Endre møteinnkalling. Møteleder kan endre tidspunkt på en møteinnkalling. Det sendes da beskjed ut til alle møtedeltakerne, som kan svare 'Godta' eller 'Forkast'. Ved å svare 'Godta', endres avtalen i den innkalte ansattes kalender. Ved å svare 'Forkast' sendes beskjed ut til alle innkalte møtedeltakere. Møteleder kan da velge å finne et nytt tidspunkt eller å avlyse møtet (se under).
+Visning. Kalenderklienten skal vise en ukeoversikt der alle avtaler og møter i den ansattes personlige kalender vises. Det skal være et tydelig skille mellom avtaler som en har opprettet selv og avtaler som en er invitert til. For avtaler en er invitert til så skal det være tydelig angitt status for egen deltakelse (om en har bekreftet/avkreftet deltakelsen). Det skal være tydelig angitt om en avtale er endret, så brukeren kan forholde seg til endringen. (Merk at det ikke er definert hva som gjør at systemet tror brukeren har forholdt seg til endringen.)
 
 \item
-Avlyse møte. Møteleder kan avlyse et møte. Det sendes da beskjed til alle møtedeltakerne, og systemet sletter møtet i deltakernes personlige kalender.
+Status for deltakelse. For møter med inviterte deltakere så skal det være tydelig angitt om 1) en alle har svart eller ikke og 2) om det er noen som har avslått invitasjonen.
 
 \item
 Melde avbud for møte. En ansatt kan melde avbud på en møteinnkalling ved å slette avtalen i sin personlige kalender. Når en ansatt melder avbud, sendes melding til alle de andre møtedeltakerne. Møteleder kan da velge om møtet skal avlyses eller om han/hun skal endre tidspunkt på møtet.
@@ -54,29 +76,9 @@ Visning. Kalenderklienten skal vise en ukekalender der alle avtaler og møter i 
 Spore møteinnkallinger. Kalenderklienten skal indikere i ukekalenderen om a) en møteinnkalling venter på svar fra en eller flere deltakere, b) en eller flere møtedeltakere har avslått møteinnkalling, eller c) om alle innkalte har godtatt møteinnkallingen.
 
 \item
-Vis flere kalendre. Det skal være mulig å vise andre ansattes avtaler sammen med sine egne i kalenderklienten.
+Vis flere kalendre. Det skal være mulig å se kalendre (avtaler og møter) for flere ansatte i samme ukesoversikt.
 
 \item
 Alarm. Det skal være mulig for hver ansatt å konfigurere enhver avtale slik at avtalen genererer en alarm en gitt tid før møtet. 
-
-\end{enumerate}
-
-\subsection{Scenarioer}
-
-Scenarioene er ikke en del av kravspesifikasjonen, men skisserer noen typiske bruksscenarier for kalendersystemet.
-
-\begin{enumerate}
-
-\item
-En ansatt har invitert tre forretningsforbindelser til samtaler i Firma X sine lokaler. Den ansatte legger inn dette som en avtale i kalenderen sin, og får kalendersystemet til å booke et ledig møterom som er passe stort for fire deltakere.
-
-\item
-Jens kaller Beate, Morten og Finn til møte. Kalendersystemet  førstkommende fredag klokka 12 til 14. Kalendertjeneren sender melding til de tre Jens har kalt inn til møte. Morten er logget på systemet med en klient, og mottar øyeblikkelig melding om møteinnkallingen. Beate og Finn mottar meldingen neste gang de logger på.
-
-\item
-Beate avslår møteinnkallingen fordi hun har en annen avtale på det tidspunktet. Morten og Finn godtar innkallingen. Først forsøker Jens seg med å endre tidspunktet på møtet. Kalendertjeneren sender ny melding ut til møtedeltakerne. Denne gangen godtar både Beate og Finn møteinnkallingen, men Morten avslår. Jens velger å slette Morten fra møteinnkallingen. 
-
-\item
-Etter at Beate og Finn har godtatt møteinnkallingen blir Jens syk. Han sletter møtet fra kalenderen sin. Kalendertjeneren sender da melding til de to andre deltakerne om at møtet er avlyst. Beate og Finn mottar begge denne meldingen neste gang de logger seg på kalendersystemet.
 
 \end{enumerate}
