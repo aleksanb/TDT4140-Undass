@@ -1,9 +1,9 @@
 .PHONY: all
 all:
-	pdflatex report.tex
-	bibtex report
-	pdflatex report.tex
-	pdflatex report.tex
+	pdflatex fellesprosjekt-kompendium.tex
+	bibtex fellesprosjekt-kompendium
+	pdflatex fellesprosjekt-kompendium.tex
+	pdflatex fellesprosjekt-kompendium.tex
 
 
 .PHONY: clean
