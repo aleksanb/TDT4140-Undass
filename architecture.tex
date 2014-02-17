@@ -17,7 +17,14 @@ Den andre av disse er konstruksjonsmessig knyttet til kravet om flerbrukerstøtt
 
 \subsection{Trelags applikasjonsarkitektur}
 
-Det er vanlig å dele applikasjoner i tre deler, med hver sin funksjon (se Figur 2):
+Det er vanlig å dele applikasjoner i tre deler, med hver sin funksjon (se Figur \ref{fig:three-layer-application}):
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{resources/three-layer-application.PNG}
+    \caption{Three layer application}
+    \label{fig:three-layer-application}
+\end{figure}
 
 \begin{enumerate}
 
@@ -36,20 +43,48 @@ Ved konstruksjon er det viktig å tenke på både den interne strukturen i hver 
 
 \subsection{Fra enbrukerapplikasjon til klient-tjener-arkitektur}
 
-Applikasjonsarkitekturen som er beskrevet over, er et greit utgangspunkt for å konstruere en enbrukerapplikasjon. I dette prosjektet kan en forestille seg at en i første omgang støtter filbasert lagring med XML som format, som illustrert i Figur 3.
+Applikasjonsarkitekturen som er beskrevet over, er et greit utgangspunkt for å konstruere en enbrukerapplikasjon. I dette prosjektet kan en forestille seg at en i første omgang støtter filbasert lagring med XML som format, som illustrert i Figur \ref{fig:simple-single-user-application}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{resources/simple-single-user-application.PNG}
+    \caption{Simple single user application}
+    \label{fig:simple-single-user-application}
+\end{figure}
 
 I en dokumentorientert applikasjon vil hele modellen bli lagret som en transaksjon, og grensesnittet mellom modellen, dvs. de to pilene, vil være nokså enkelt. Den venstre pilen representerer funksjonen modell-til-XML-oversetting, mens den høyre pilen tilsvarer den motsatte funksjonen XML-til-modell-oversetting. Merk at funksjonene håndterer kun hele modeller, så det er ikke behov for å oversette delmodeller i den ene eller andre retning. Det kan selvsagt være lurt å bryte funksjonene ned i mindre deler, basert på modellens struktur, men dette er konstruksjonsdetaljer som ikke påvirker grensesnittet representert ved pilene.
 
-En ulempe med denne applikasjonsarkitekturen er at XML-filer ikke kan leses eller skrives over nettverket (med mindre en utnytter nettverkstøtten i filsystemet), f.eks. http- eller ftp-URL’er. Det skal imidlertid ikke så mye endring til for å håndtere dette, som vist i Figur 4.
+En ulempe med denne applikasjonsarkitekturen er at XML-filer ikke kan leses eller skrives over nettverket (med mindre en utnytter nettverkstøtten i filsystemet), f.eks. http- eller ftp-URL’er. Det skal imidlertid ikke så mye endring til for å håndtere dette, som vist i Figur \ref{fig:simple-server-based-storage-architecture}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{resources/simple-server-based-storage-architecture.PNG}
+    \caption{Architecture with server based storage}
+    \label{fig:simple-server-based-storage-architecture}
+\end{figure}
 
 Her vil klientapplikasjonen være så godt som uendret. Den eneste forskjellen er at lesing og skriving av XML-dokumentet skjer over nettverket, ved hjelp av en eller annen protokoll. Dersom en bruker URL-er til å adressere tjeneren og Java sin innebygde støtte for lesing og skriving til URL-oppkoblinger, så er det lite omkoding som trengs. I tillegg er det et stort poeng at endringen er intern i persistensdelen, så GUI og modellen er ikke berørt, kanskje bortsett fra dialogelementer for visning og innskriving av URL-en.
 Tjeneren vil i dette tilfellet være nokså enkel, da den kun skal kunne ta i mot en oppkobling og kunne lese fra og skrive til nettverket og henholdsvis skrive til og lese fra fil.
 
-Dersom en deler opp persistensdelen i en del som håndterer oversettingen til og fra XML og en del som håndterer lesing og skriving, er det relativt enkelt å få til en kombinasjon av disse to. Dette er vist i Figur 5.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{resources/file-and-server-storage-architecture.PNG}
+    \caption{Architecture with local and server based storage}
+    \label{fig:file-and-server-storage-architecture}
+\end{figure}
+
+Dersom en deler opp persistensdelen i en del som håndterer oversettingen til og fra XML og en del som håndterer lesing og skriving, er det relativt enkelt å få til en kombinasjon av disse to. Dette er vist i Figur \ref{fig:file-and-server-storage-architecture}.
 
 Dette krever at overgangen mellom XML-oversettingen og lesing/skriving av XML-dokumentet er tydelig, f.eks. definert i et eget Java-grensesnitt og at en har klasser for filbasert og nettverksbasert I/O som implementerer dette grensesnittet. Dette tilsvarer forøvrig arkitekturen til først inkrement, med HTTP som nettverksprotokoll.
 
-Selv om vi i de to siste figurene har innført en tjener, er tjeneren såpass enkel at arkitekturen ikke håndterer at flere brukere får tilgang til de samme dataene. Rollen til tjeneren er foreløpig kun knyttet til lagring og ikke til delt tilgang for flere klienter til felles data. For å få det til er det vesentlig at tjeneren også har et modell-lag og mekanismer for å håndtere delt tilgang. Figur 6 skisserer en arkitektur for å håndtere dette, men figuren forteller bare en del av historien.
+Selv om vi i de to siste figurene har innført en tjener, er tjeneren såpass enkel at arkitekturen ikke håndterer at flere brukere får tilgang til de samme dataene. Rollen til tjeneren er foreløpig kun knyttet til lagring og ikke til delt tilgang for flere klienter til felles data. For å få det til er det vesentlig at tjeneren også har et modell-lag og mekanismer for å håndtere delt tilgang. Figur \ref{fig:split-server-model-architecture} skisserer en arkitektur for å håndtere dette, men figuren forteller bare en del av historien.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{resources/split-server-model-architecture.PNG}
+    \caption{Architecture with shared model on server}
+    \label{fig:split-server-model-architecture}
+\end{figure}
 
 Merk at modellene kan godt være implementert av akkurat de samme klassene og vi kan godt bruke XML som overføringsformat. I tillegg til å innføre et modell-lag i tjeneren, er det viktig å definere regler for samspillet mellom tjenerens modell og modellen i hver klient:
 
@@ -86,7 +121,14 @@ En må kunne angi hvilke deler av den offisielle modellen som skal endres, f.eks
 
 Det som overføres i begge retninger mellom klient og tjener kan sees på som en kommando med tilhørende data, og en viktig del av designarbeidet er å definere kommandoene slik at dekker behovene over og bestemme hvordan de skal kodes i XML og formidles over HTTP.
 
-Som vi ser er persistenslaget omdøpt til kommunikasjon i figuren over, men det betyr ikke at persistens er mindre viktig. Vi må fortsatt sikre at dataene overlever når applikasjonen avslutter, så persistensmekanismen må gjeninnføres, slik vi har vist i Figur 7.
+Som vi ser er persistenslaget omdøpt til kommunikasjon i figuren over, men det betyr ikke at persistens er mindre viktig. Vi må fortsatt sikre at dataene overlever når applikasjonen avslutter, så persistensmekanismen må gjeninnføres, slik vi har vist i Figur \ref{fig:database-based-server-persistence}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{resources/database-based-server-persistence.PNG}
+    \caption{Serverside persistent storage}
+    \label{fig:database-based-server-persistence}
+\end{figure}
 
 For å sikre at modellen kan gjenopprettes hvis tjeneren krasjer, er det viktig at databasen blir oppdatert i takt med tjenerens modell. Hvilken som oppdateres først, modellen eller databasen, er en smakssak, men begge bør gjøres før klientene oppdateres, for å minimere muligheten for at krasj underveis. Det overordnede poenget er at det er databaseinnholdet som er grunnlaget for å gjenopprette modellen ved krasj eller vedlikehold av tjeneren. Derfor er databasen til syvende og sist mer ”offisiell” enn modellen i den kjørende tjeneren, siden det er den vi sitter igjen med når strømmen slås av.
 
@@ -192,7 +234,7 @@ Kjerneapplikasjonen bygger på en trelagsarkitektur. Det vil si at applikasjonen
 
 \begin{figure}[H]
     \centering
-    \includegraphics{resources/layering-application.jpg}
+    \includegraphics[scale=0.8]{resources/layering-application.jpg}
     \caption{Application layering}
     \label{fig:layering-application}
 \end{figure}
@@ -201,7 +243,7 @@ Hvert av lagene i applikasjonen tar seg av ulike funksjoner. Alle Java-klassene 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{resources/layering-corresponding-java-packets.jpg}
+    \includegraphics[scale=0.8]{resources/layering-corresponding-java-packets.jpg}
     \caption{Layering with corresponding java packages}
     \label{fig:layering-corresponding-java-packets}
 \end{figure}
