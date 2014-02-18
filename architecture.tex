@@ -13,7 +13,7 @@ Applikasjonsdata, slik de representeres mens applikasjonen er i bruk, og deres p
 
 \end{enumerate}
 
-Den andre av disse er konstruksjonsmessig knyttet til kravet om flerbrukerstøtte, som vi etter hvert skal se i de etterfølgende kapitlene. Kapittel 3.1 beskriver en overordnet systemarkitektur for de som har både SU, DB og KTN. For de som ikke tar DB, KTN og / eller MMI, vil det være noen endringer som er beskrevet i Kapittel 3.5.
+Den andre av disse er konstruksjonsmessig knyttet til kravet om flerbrukerstøtte, som vi etter hvert skal se i de etterfølgende kapitlene. Kapittel 3.1 beskriver en overordnet systemarkitektur for de som har både PU, DB og KTN. For de som ikke tar DB, KTN og / eller MMI, vil det være noen endringer som er beskrevet i Kapittel 3.5.
 
 \subsection{Trelags applikasjonsarkitektur}
 
@@ -39,7 +39,7 @@ Persistensdelen håndterer lagring av modellen mellom hver kjøring av applikasj
 
 \end{enumerate}
 
-Ved konstruksjon er det viktig å tenke på både den interne strukturen i hver av de tre delene, som gjerne følger bestemte regler eller mønster for konstruksjon, og grensesnittet og samspillet mellom dem. Den interne strukturen i brukergrensesnittet og forholdet mellom brukergrensesnittet og modellen er en sentral del av MMI-faget. DB-faget tar for seg forholdet mellom applikasjonen og databasebasert persistens og struktur og egenskaper for databasen. Dersom disse tre delene av applikasjonen er skilt fra hverandre med et nettverk, har KTN-faget sitt å si om hvordan dette bør håndteres. SU-faget har den modellen/applikasjonslogikken og den overordnede strukturen eller arkitekturen, som sitt anliggende.
+Ved konstruksjon er det viktig å tenke på både den interne strukturen i hver av de tre delene, som gjerne følger bestemte regler eller mønster for konstruksjon, og grensesnittet og samspillet mellom dem. Den interne strukturen i brukergrensesnittet og forholdet mellom brukergrensesnittet og modellen er en sentral del av MMI-faget. DB-faget tar for seg forholdet mellom applikasjonen og databasebasert persistens og struktur og egenskaper for databasen. Dersom disse tre delene av applikasjonen er skilt fra hverandre med et nettverk, har KTN-faget sitt å si om hvordan dette bør håndteres. PU-faget har den modellen/applikasjonslogikken og den overordnede strukturen eller arkitekturen, som sitt anliggende.
 
 \subsection{Fra enbrukerapplikasjon til klient-tjener-arkitektur}
 
