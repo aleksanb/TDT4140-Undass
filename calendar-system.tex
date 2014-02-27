@@ -16,6 +16,7 @@ Figur \ref{fig:high-level-architecture}  viser et høynivå systemarkitektur ove
 Scenarioene er ikke en del av kravspesifikasjonen, men skisserer noen typiske bruksscenarier for kalendersystemet, som vil støttes dersom kravene oppfylles.
 
 \begin{enumerate}
+\label{sec:scenarios}
 
 \item
 Per har invitert tre forretningsforbindelser til samtaler i egne lokaler førstkommende fredag klokka 12 til 14. Per legger inn dette som en avtale i kalenderen sin, legger inn kollegaen Siv som deltaker (han ser hun er ledig da) og får kalendersystemet til å booke et ledig møterom som er passe stort for fem deltakere.
@@ -41,8 +42,7 @@ I tillegg til at de ansatte skal kunne planlegge dagene sine med å legge inn av
 Logge på. Ansatte får tilgang til kalendersystemet ved å logge seg på kalenderklienten med brukernavn og passord.
 
 \item
-Legge inn avtale. Ansatte skal kunne legge inn avtaler i kalenderen sin. En avtale legges inn på avtaledato med et start- og sluttidspunkt alternativt start-tidspunkt og varighet, samt en kort beskrivelse av avtalen ("Bil på verksted") og eventuelt sted for avtalen ("Strandveien
->Auto"). Det skal være lov å legge inn flere avtaler for overlappende tidspunkt.
+Legge inn avtale. Ansatte skal kunne legge inn avtaler i kalenderen sin. En avtale legges inn på avtaledato med et start- og sluttidspunkt alternativt start-tidspunkt og varighet, samt en kort beskrivelse av avtalen ("Bil på verksted") og eventuelt sted for avtalen ("Strandveien Auto"). Det skal være lov å legge inn flere avtaler for overlappende tidspunkt.
 
 \item
 Håndtere møtedeltakere. Den som har lagt til en avtale skal også kunne legge til (eller fjerne) (potensielle) deltakere, ved å angi enkeltpersoner og/eller grupper. Grupper administreres utenfor systemet og kan ses på som en samling personer uten noen spesiell struktur (roller/hierarkier). Inviterte deltakerne skal kunne bekrefte evt. avkrefte at de deltar. Dersom en deltaker avkrefter deltakelse, så kan han/hun også velge om den skal skjules i kalenderen sin.
@@ -54,8 +54,7 @@ Endre avtale. Ansatte skal kunne endre på avtaler de har opprettet. Alle felten
 Slette avtale. Ansatte skal kunne slette avtaler de har opprettet, og disse forsvinner da fra kalenderen til alle deltakere.
 
 \item
-Reservere møterom. I stedet for å skrive inn sted for en avtale eller et møte, skal brukeren kunne velge møterom blant de som er ledige i det angitte tidsrommet. Ved endring av tidsrommet, skal kalendersystemt automatisk reservere møterommet for det nye tidrommet, men ikke holde på
->det om andre har reservert det da. Det skal være mulig å angi antall deltakere som rommet skal kunne ta, uavhengig av antallet deltakere som er invitert og evt. har bekreftet at de kommer.
+Reservere møterom. I stedet for å skrive inn sted for en avtale eller et møte, skal brukeren kunne velge møterom blant de som er ledige i det angitte tidsrommet. Ved endring av tidsrommet, skal kalendersystemt automatisk reservere møterommet for det nye tidrommet, men ikke holde på det om andre har reservert det da. Det skal være mulig å angi antall deltakere som rommet skal kunne ta, uavhengig av antallet deltakere som er invitert og evt. har bekreftet at de kommer.
 
 \item
 Visning. Kalenderklienten skal vise en ukeoversikt der alle avtaler og møter i den ansattes personlige kalender vises. Det skal være et tydelig skille mellom avtaler som en har opprettet selv og avtaler som en er invitert til. For avtaler en er invitert til så skal det være tydelig angitt status for egen deltakelse (om en har bekreftet/avkreftet deltakelsen). Det skal være tydelig angitt om en avtale er endret, så brukeren kan forholde seg til endringen. (Merk at det ikke er definert hva som gjør at systemet tror brukeren har forholdt seg til endringen.)
