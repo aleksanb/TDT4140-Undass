@@ -29,5 +29,5 @@ module ::Guard
 end
 
 guard 'guardtex' do
-    watch('report.tex')
+    watch(%r{.+\.tex})
 end
